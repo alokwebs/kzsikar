@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KZ Music Booking</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🎵 KZ Music Booking 🎵</h1>
+    <form id="bookingForm">
+      <input type="text" id="name" placeholder="Enter Name" required />
+      <input type="tel" id="phone" placeholder="Enter Phone Number" required />
+      <input type="date" id="date" required />
+      <button type="submit">Book Date</button>
+    </form>
+
+    <h2>📅 Booking List</h2>
+    <ul id="bookingList"></ul>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script type="module" src="hello.js"></script>
+</body>
+</html>
