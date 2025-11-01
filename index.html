@@ -455,6 +455,156 @@
       font-size: 0.9rem;
     }
 
+    /* CTA SECTION */
+    .cta-section {
+      padding: 100px 0;
+      background: linear-gradient(135deg, var(--accent) 0%, #ff8e53 100%);
+      color: white;
+      text-align: center;
+    }
+
+    .cta-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .cta-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .cta-subtitle {
+      font-size: 1.3rem;
+      margin-bottom: 40px;
+      opacity: 0.9;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      padding: 18px 35px;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cta-btn-primary {
+      background: white;
+      color: var(--accent);
+      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+    }
+
+    .cta-btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(255, 255, 255, 0.4);
+    }
+
+    .cta-btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .cta-btn-secondary:hover {
+      background: white;
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    /* FLOATING WHATSAPP BUTTON */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 70px;
+      height: 70px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+      text-decoration: none;
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+      transition: all 0.3s ease;
+      z-index: 1000;
+      animation: pulse 2s infinite;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+      }
+      50% {
+        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.8);
+      }
+      100% {
+        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+      }
+    }
+
+    .whatsapp-text {
+      position: absolute;
+      right: 80px;
+      background: #25D366;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateX(20px);
+      transition: all 0.3s ease;
+    }
+
+    .whatsapp-float:hover .whatsapp-text {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* FLOATING BOOKING BUTTON */
+    .booking-float {
+      position: fixed;
+      bottom: 110px;
+      right: 25px;
+      background: linear-gradient(45deg, #ff3c00, #ff6b00);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 8px 25px rgba(255, 60, 0, 0.4);
+      transition: all 0.3s ease;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .booking-float:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(255, 60, 0, 0.6);
+    }
+
     /* FOOTER */
     .footer {
       background: linear-gradient(135deg, #1a1f36 0%, #2d3748 100%);
@@ -662,6 +812,10 @@
       .footer-content {
         grid-template-columns: 1fr 1fr;
       }
+
+      .whatsapp-text {
+        display: none;
+      }
     }
 
     @media (max-width: 768px) {
@@ -686,6 +840,58 @@
         flex-direction: column;
         gap: 20px;
         text-align: center;
+      }
+
+      .cta-title {
+        font-size: 2.5rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .cta-btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+
+      .whatsapp-float {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        bottom: 20px;
+        right: 20px;
+      }
+
+      .booking-float {
+        bottom: 90px;
+        right: 20px;
+        padding: 12px 20px;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h2 {
+        font-size: 2rem;
+      }
+
+      .cta-title {
+        font-size: 2rem;
+      }
+
+      .whatsapp-float {
+        width: 55px;
+        height: 55px;
+        font-size: 1.3rem;
+      }
+
+      .booking-float {
+        bottom: 85px;
+        padding: 10px 18px;
+        font-size: 0.8rem;
       }
     }
   </style>
@@ -874,6 +1080,35 @@
       </div>
     </div>
   </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2 class="cta-title">Ready to Create Magic?</h2>
+      <p class="cta-subtitle">Let's work together to create an unforgettable event that will be cherished forever</p>
+      <div class="cta-buttons">
+        <a href="booking.html" class="cta-btn cta-btn-primary">
+          <i class="fas fa-calendar-check"></i>
+          Book Your Event
+        </a>
+        <a href="contectus.html" class="cta-btn cta-btn-secondary">
+          <i class="fas fa-phone"></i>
+          Contact Us Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOATING BUTTONS -->
+  <a href="https://wa.me/919876543210" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+    <span class="whatsapp-text">Chat with us on WhatsApp</span>
+  </a>
+
+  <a href="booking.html" class="booking-float">
+    <i class="fas fa-calendar-plus"></i>
+    Book Now
+  </a>
 
   <!-- FOOTER -->
   <footer class="footer">
