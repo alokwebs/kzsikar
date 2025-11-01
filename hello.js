@@ -1,78 +1,50 @@
-// ✅ Firebase Imports
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-import { getDatabase, ref, push, onValue, set } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-database.js";
 
-// ✅ Your Firebase Config (replace with your values)
-const firebaseConfig = {
-  apiKey: "AIzaSyA3GlG5vRRZX_hWJskIrjCkx4Zrua7wKsM",
-  authDomain: "kz-sikar.firebaseapp.com",
-  databaseURL: "https://kz-sikar-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "kz-sikar",
-  storageBucket: "kz-sikar.firebasestorage.app",
-  messagingSenderId: "896083049571",
-  appId: "1:896083049571:web:89baf134bfdaec78544c56",
-  measurementId: "G-B6RFTZPR3X"
-};
 
-// ✅ Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
 
-// HTML Elements
-const form = document.getElementById("bookingForm");
-const bookingList = document.getElementById("bookingList");
 
-// 🔹 Form Submit Event
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
 
-  const name = document.getElementById("name").value.trim();
-  const phone = document.getElementById("phone").value.trim();
-  const date = document.getElementById("date").value.trim();
 
-  if (!name || !phone || !date) {
-    alert("❌ Please fill all fields!");
-    return;
-  }
 
-  // 🔹 Check if date already booked
-  const bookingsRef = ref(db, "bookings");
-  let alreadyBooked = false;
 
-  onValue(bookingsRef, (snapshot) => {
-    snapshot.forEach((childSnapshot) => {
-      const data = childSnapshot.val();
-      if (data.date === date) {
-        alreadyBooked = true;
-      }
+
+
+
+    // Menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+
+      // toggle icon between bars and close
+      menuToggle.innerHTML = navLinks.classList.contains('show')
+        ? '<i class="fas fa-times"></i>'
+        : '<i class="fas fa-bars"></i>';
     });
-  }, { onlyOnce: true });
+
+    // Close menu when clicking on a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('show');
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+    });
+
+ 
+
+// ✅ Handle Booking Form Submit
+const form = document.getElementById("bookingForm");
+const submitBtn = document.getElementById("submitBtn");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  submitBtn.classList.add("loading");
+  submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Booking...`;
 
   setTimeout(() => {
-    if (alreadyBooked) {
-      alert("⚠️ This date is already booked!");
-    } else {
-      const newRef = push(bookingsRef);
-      set(newRef, {
-        name,
-        phone,
-        date,
-        createdAt: new Date().toLocaleString()
-      });
-      alert("✅ Booking successful!");
-      form.reset();
-    }
-  }, 500);
-});
-
-// 🔹 Display Bookings
-const bookingsRef = ref(db, "bookings");
-onValue(bookingsRef, (snapshot) => {
-  bookingList.innerHTML = "";
-  snapshot.forEach((childSnapshot) => {
-    const data = childSnapshot.val();
-    const li = document.createElement("li");
-    li.textContent = `${data.name} | ${data.phone} | ${data.date}`;
-    bookingList.appendChild(li);
-  });
+    submitBtn.classList.remove("loading");
+    submitBtn.innerHTML = `<i class="fas fa-paper-plane"></i> Book Now`;
+    showNotification("Success!", "Your booking has been submitted successfully.", "success");
+    form.reset();
+  }, 1500);
 });

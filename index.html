@@ -1,26 +1,140 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KZ Music Booking</title>
+  <title>Music Floor</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="media.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+  
+  <header class="navbar">
+    <div class="menu-toggle" id="menuToggle">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <div class="logo">
+      <div class="kz-logo-text">KZ</div>
+      <h1>EVENTS <span>SIKAR</span></h1>
+    </div>
+
+    <nav class="nav-links" id="navLinks">
+      <ul>
+        <li><a href="" class="active">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="booking.html">Booking</a></li>
+        <li><a href="contectus.html">Contact Us</a></li>
+      </ul>
+      <div class="owner">
+        <a href="login.html"><img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png" alt="Owner" title="Owner Dashboard"></a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>WELCOME TO<br>KZ EVENTS SIKAR</h2>
+      <p>Creating Unforgettable Moments & Memorable Experiences</p>
+      <a href="booking.html"><button class="booking-btn">Book Your Event Now</button></a>
+    </div>
+  </section>
+
+
+
+  <!-- FOOTER -->
+<footer class="footer">
   <div class="container">
-    <h1>🎵 KZ Music Booking 🎵</h1>
-    <form id="bookingForm">
-      <input type="text" id="name" placeholder="Enter Name" required />
-      <input type="tel" id="phone" placeholder="Enter Phone Number" required />
-      <input type="date" id="date" required />
-      <button type="submit">Book Date</button>
-    </form>
+    <div class="footer-content">
+      <!-- Brand & Social -->
+      <div class="footer-section">
+        <div class="footer-brand">
+          <div class="logos">
+            <span class="logo-kz">KZ</span>
+            <div class="logo-text">
+              <span class="events">EVENTS</span>
+              <span class="sikar">SIKAR</span>
+            </div>
+          </div>
+          <p class="tagline">Creating unforgettable moments</p>
+          <div class="social-links">
+            <a href="#" class="social-link">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+      </div>
 
-    <h2>📅 Booking List</h2>
-    <ul id="bookingList"></ul>
+      <!-- Quick Links -->
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <div class="footer-links">
+          <a href="#home">Home</a>
+          <a href="#services">Services</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div class="footer-section">
+        <h4>Services</h4>
+        <div class="footer-links">
+          <a href="#">Wedding Planning</a>
+          <a href="#">Corporate Events</a>
+          <a href="#">Birthday Parties</a>
+          <a href="#">Event Decor</a>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="footer-section">
+        <h4>Contact Info</h4>
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <span>+91 98765 43210</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>info@kzevents.com</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Sikar, Rajasthan</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <p>&copy; 2024 KZ Events Sikar. All rights reserved.</p>
+        <div class="legal-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Cookies</a>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <!-- Firebase SDKs -->
-  <script type="module" src="hello.js"></script>
+</footer>
+  <script src="hello.js"></script>
 </body>
 </html>
+  

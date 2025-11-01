@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - KZ Events Sikar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff6b35, #ff8e53);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-size: 1.3rem;
+            font-family: 'Arial Black', sans-serif;
+        }
+
+        .header h1 {
+            color: #2d3748;
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #ff6b35, #ff8e53);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .error-message {
+            color: #f56565;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        .debug-info {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #4a5568;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">KZ</div>
+                <div>
+                    <div style="font-size: 1.4rem; font-weight: 700;">EVENTS</div>
+                    <div style="font-size: 1.2rem; font-weight: 600; color: #ff6b35;">SIKAR</div>
+                </div>
+            </div>
+            <h1>Admin Login</h1>
+            <p>Use: admin@kzevents.com / Admin@12345</p>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <input type="email" id="email" class="form-input" placeholder="Email" value="admin@kzevents.com" required>
+            </div>
+
+            <div class="form-group">
+                <input type="password" id="password" class="form-input" placeholder="Password" value="Admin@12345" required>
+            </div>
+
+            <button type="submit" class="login-btn" id="loginBtn">
+                Sign In
+            </button>
+        </form>
+
+        <div class="error-message" id="errorMessage"></div>
+
+        <div class="debug-info">
+            <strong>Debug Info:</strong><br>
+            <div id="debugStatus">Ready to login...</div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyA3GlG5vRRZX_hWJskIrjCkx4Zrua7wKsM",
+            authDomain: "kz-sikar.firebaseapp.com",
+            databaseURL: "https://kz-sikar-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "kz-sikar",
+            storageBucket: "kz-sikar.firebasestorage.app",
+            messagingSenderId: "896083049571",
+            appId: "1:896083049571:web:89baf134bfdaec78544c56",
+            measurementId: "G-B6RFTZPR3X"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Debug info
+        document.getElementById('debugStatus').textContent = 'Firebase initialized successfully';
+
+        // Form submission
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            const loginBtn = document.getElementById('loginBtn');
+            const debugStatus = document.getElementById('debugStatus');
+
+            // Reset error
+            errorMessage.style.display = 'none';
+            loginBtn.textContent = 'Signing In...';
+            loginBtn.disabled = true;
+
+            try {
+                debugStatus.textContent = 'Attempting login...';
+                
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                
+                debugStatus.textContent = 'Login successful! Redirecting...';
+                errorMessage.style.display = 'none';
+                
+                // Redirect to admin page
+                setTimeout(() => {
+                    window.location.href = 'admin.html';
+                }, 1000);
+                
+            } catch (error) {
+                loginBtn.textContent = 'Sign In';
+                loginBtn.disabled = false;
+                
+                let errorMsg = '';
+                switch (error.code) {
+                    case 'auth/invalid-email':
+                        errorMsg = 'Invalid email address';
+                        break;
+                    case 'auth/user-not-found':
+                        errorMsg = 'No user found with this email';
+                        break;
+                    case 'auth/wrong-password':
+                        errorMsg = 'Incorrect password';
+                        break;
+                    case 'auth/too-many-requests':
+                        errorMsg = 'Too many attempts. Try again later.';
+                        break;
+                    default:
+                        errorMsg = 'Login failed: ' + error.message;
+                }
+                
+                errorMessage.textContent = errorMsg;
+                errorMessage.style.display = 'block';
+                debugStatus.textContent = 'Error: ' + errorMsg;
+            }
+        });
+
+        // Check if already logged in
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('debugStatus').textContent = 'Already logged in, redirecting...';
+                window.location.href = 'admin.html';
+            }
+        });
+    </script>
+</body>
+</html>
