@@ -7,6 +7,19 @@ document.addEventListener('DOMContentLoaded', function() {
   initScrollEffects();
   initAnimations();
   initCounters();
+  
+  // Initialize page-specific functionality
+  if (document.getElementById('contactForm')) {
+    initContactForm();
+  }
+  
+  if (document.getElementById('galleryGrid')) {
+    initGallery();
+  }
+  
+  if (document.getElementById('calendarDays')) {
+    initBooking();
+  }
 });
 
 // Navigation Functionality
@@ -166,8 +179,6 @@ function debounce(func, wait, immediate) {
   };
 }
 
-
-
 // ================== CONTACT PAGE JAVASCRIPT ===================
 
 // Contact form handling
@@ -209,36 +220,6 @@ function initContactForm() {
         });
     });
 }
-
-// Initialize contact page specific functionality
-document.addEventListener('DOMContentLoaded', function() {
-    initContactForm();
-    
-    // Add animation to contact page elements
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
-            }
-        });
-    }, observerOptions);
-    
-    // Observe contact page elements for animation
-    document.querySelectorAll('.team-member, .info-card').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-});
-
-
-
 
 // ================== GALLERY PAGE JAVASCRIPT ===================
 
@@ -364,42 +345,7 @@ function initGallery() {
     });
 }
 
-// Initialize gallery functionality
-document.addEventListener('DOMContentLoaded', function() {
-    initGallery();
-    
-    // Add smooth animations to gallery items
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
-            }
-        });
-    }, observerOptions);
-    
-    // Observe gallery elements for animation
-    document.querySelectorAll('.gallery-item, .info-card').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-});
-
-
-
-
-
-
-
-
-
-//// ================== DIRECT BOOKING SYSTEM ===================
+// ================== DIRECT BOOKING SYSTEM ===================
 
 // Booking functionality
 function initBooking() {
@@ -743,8 +689,8 @@ Sikar, Rajasthan`;
     init();
 }
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
+// Initialize when DOM is loaded for booking page
+if (document.getElementById('calendarDays')) {
     try {
         if (typeof firebase !== 'undefined') {
             initBooking();
@@ -765,339 +711,4 @@ document.addEventListener('DOMContentLoaded', function() {
             notification.classList.add('show');
         }
     }
-});
-
-
-
-
-// Firebase Configuration and Authentication
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-import { 
-    getAuth, 
-    signInWithEmailAndPassword, 
-    onAuthStateChanged, 
-    signOut 
-} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-import { 
-    getDatabase, 
-    ref, 
-    onValue, 
-    update, 
-    remove 
-} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-database.js";
-
-// Firebase Config
-const firebaseConfig = {
-    apiKey: "AIzaSyA3GlG5vRRZX_hWJskIrjCkx4Zrua7wKsM",
-    authDomain: "kz-sikar.firebaseapp.com",
-    databaseURL: "https://kz-sikar-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "kz-sikar",
-    storageBucket: "kz-sikar.firebasestorage.app",
-    messagingSenderId: "896083049571",
-    appId: "1:896083049571:web:89baf134bfdaec78544c56",
-    measurementId: "G-B6RFTZPR3X"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getDatabase(app);
-
-// DOM Elements
-const loginForm = document.getElementById('loginForm');
-const emailInput = document.getElementById('email');
-const passwordInput = document.getElementById('password');
-const passwordToggle = document.getElementById('passwordToggle');
-const loginBtn = document.getElementById('loginBtn');
-const errorMessage = document.getElementById('errorMessage');
-const errorText = document.getElementById('errorText');
-
-// Password Toggle
-if (passwordToggle) {
-    passwordToggle.addEventListener('click', () => {
-        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-        passwordInput.setAttribute('type', type);
-        passwordToggle.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
-    });
 }
-
-// Login Functionality
-if (loginForm) {
-    loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const email = emailInput.value;
-        const password = passwordInput.value;
-        
-        // Show loading state
-        loginBtn.classList.add('loading');
-        errorMessage.classList.remove('show');
-        
-        try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
-            
-            // Redirect to admin page
-            window.location.href = 'admin.html';
-            
-        } catch (error) {
-            loginBtn.classList.remove('loading');
-            
-            let errorMsg = '';
-            switch (error.code) {
-                case 'auth/invalid-email':
-                    errorMsg = 'Invalid email address format';
-                    break;
-                case 'auth/user-not-found':
-                    errorMsg = 'No account found with this email';
-                    break;
-                case 'auth/wrong-password':
-                    errorMsg = 'Incorrect password';
-                    break;
-                case 'auth/too-many-requests':
-                    errorMsg = 'Too many failed attempts. Please try again later.';
-                    break;
-                default:
-                    errorMsg = 'Login failed. Please try again.';
-            }
-            
-            errorText.textContent = errorMsg;
-            errorMessage.classList.add('show');
-        }
-    });
-}
-
-// Admin Dashboard Functionality
-if (document.getElementById('bookingsTableBody')) {
-    // DOM Elements for Admin
-    const bookingsTableBody = document.getElementById('bookingsTableBody');
-    const emptyState = document.getElementById('emptyState');
-    const searchInput = document.getElementById('searchInput');
-    const refreshBtn = document.getElementById('refreshBtn');
-    const logoutBtn = document.getElementById('logoutBtn');
-    const totalBookingsEl = document.getElementById('totalBookings');
-    const todayBookingsEl = document.getElementById('todayBookings');
-    
-    let currentEditKey = null;
-    
-    // Show notification
-    function showNotification(type, title, message) {
-        // Create notification element if it doesn't exist
-        let notification = document.getElementById('notification');
-        if (!notification) {
-            notification = document.createElement('div');
-            notification.id = 'notification';
-            notification.className = 'notification';
-            notification.innerHTML = `
-                <div class="notification-content">
-                    <div class="notification-icon">
-                        <i class="fas fa-check"></i>
-                    </div>
-                    <div class="notification-text">
-                        <h4 id="notificationTitle">Success!</h4>
-                        <p id="notificationMessage">Operation completed successfully.</p>
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(notification);
-        }
-        
-        const notificationIcon = notification.querySelector('.notification-icon i');
-        const notificationTitle = document.getElementById('notificationTitle');
-        const notificationMessage = document.getElementById('notificationMessage');
-        
-        notification.className = `notification ${type}`;
-        notificationTitle.textContent = title;
-        notificationMessage.textContent = message;
-        
-        if (type === 'success') {
-            notificationIcon.className = 'fas fa-check';
-        } else if (type === 'error') {
-            notificationIcon.className = 'fas fa-exclamation-triangle';
-        } else {
-            notificationIcon.className = 'fas fa-info-circle';
-        }
-        
-        notification.classList.add('show');
-        
-        setTimeout(() => {
-            notification.classList.remove('show');
-        }, 4000);
-    }
-    
-    // Format date
-    function formatDate(dateString) {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('en-IN', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric'
-        });
-    }
-    
-    // Send WhatsApp message
-    function sendWhatsApp(phone, name, date, address) {
-        const cleanPhone = phone.replace(/\D/g, '');
-        const message = `Hello ${name},%0A%0AThank you for booking with KZ Events Sikar!%0A%0AWe're excited to be part of your special day on ${formatDate(date)} at ${address}.%0A%0APlease let us know if you have any questions or special requirements.%0A%0ABest regards,%0AKZ Events Sikar Team`;
-        window.open(`https://wa.me/91${cleanPhone}?text=${message}`, '_blank');
-    }
-    
-    // Make phone call
-    function makeCall(phone) {
-        const cleanPhone = phone.replace(/\D/g, '');
-        window.open(`tel:${cleanPhone}`, '_blank');
-    }
-    
-    // Load bookings from Firebase
-    function loadBookings() {
-        const bookingsRef = ref(db, "bookings");
-        onValue(bookingsRef, (snapshot) => {
-            const bookings = [];
-            let todayCount = 0;
-            const today = new Date().toDateString();
-            
-            snapshot.forEach((childSnapshot) => {
-                const booking = childSnapshot.val();
-                booking.key = childSnapshot.key;
-                bookings.push(booking);
-                
-                // Count today's bookings
-                const bookingDate = new Date(booking.createdAt).toDateString();
-                if (bookingDate === today) {
-                    todayCount++;
-                }
-            });
-            
-            // Update stats
-            if (totalBookingsEl) totalBookingsEl.textContent = bookings.length;
-            if (todayBookingsEl) todayBookingsEl.textContent = todayCount;
-            
-            // Display bookings
-            displayBookings(bookings);
-        });
-    }
-    
-    // Display bookings in table
-    function displayBookings(bookings) {
-        if (!bookingsTableBody) return;
-        
-        if (bookings.length === 0) {
-            emptyState.style.display = 'block';
-            bookingsTableBody.innerHTML = '';
-            return;
-        }
-        
-        emptyState.style.display = 'none';
-        
-        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
-        const filteredBookings = bookings.filter(booking => 
-            booking.name.toLowerCase().includes(searchTerm) ||
-            booking.phone.includes(searchTerm) ||
-            booking.address.toLowerCase().includes(searchTerm) ||
-            booking.date.includes(searchTerm)
-        );
-        
-        bookingsTableBody.innerHTML = filteredBookings.map(booking => `
-            <tr class="booking-row">
-                <td>
-                    <div class="client-info">
-                        <div class="client-name">${booking.name}</div>
-                        <div class="client-phone">
-                            <i class="fas fa-phone"></i>
-                            ${booking.phone}
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="event-date">${formatDate(booking.date)}</div>
-                </td>
-                <td>
-                    <div class="event-address">${booking.address}</div>
-                </td>
-                <td>
-                    <div class="created-at">${booking.createdAt}</div>
-                </td>
-                <td>
-                    <div class="actions">
-                        <button class="action-btn whatsapp" onclick="sendWhatsApp('${booking.phone}', '${booking.name}', '${booking.date}', '${booking.address}')">
-                            <i class="fab fa-whatsapp"></i>
-                            WhatsApp
-                        </button>
-                        <button class="action-btn call" onclick="makeCall('${booking.phone}')">
-                            <i class="fas fa-phone"></i>
-                            Call
-                        </button>
-                        <button class="action-btn edit" onclick="editBooking('${booking.key}')">
-                            <i class="fas fa-edit"></i>
-                            Edit
-                        </button>
-                        <button class="action-btn delete" onclick="deleteBooking('${booking.key}', '${booking.name}')">
-                            <i class="fas fa-trash"></i>
-                            Delete
-                        </button>
-                    </div>
-                </td>
-            </tr>
-        `).join('');
-    }
-    
-    // Edit booking
-    window.editBooking = function(key) {
-        // Implementation for edit modal
-        showNotification('info', 'Edit Feature', 'Edit booking functionality would open a modal here');
-    };
-    
-    // Delete booking
-    window.deleteBooking = function(key, name) {
-        if (confirm(`Are you sure you want to delete booking for ${name}?`)) {
-            const bookingRef = ref(db, `bookings/${key}`);
-            remove(bookingRef)
-                .then(() => {
-                    showNotification('success', 'Booking Deleted', `Booking for ${name} has been deleted successfully.`);
-                })
-                .catch((error) => {
-                    showNotification('error', 'Error', 'Failed to delete booking. Please try again.');
-                });
-        }
-    };
-    
-    // Search functionality
-    if (searchInput) {
-        searchInput.addEventListener('input', () => {
-            loadBookings();
-        });
-    }
-    
-    // Refresh functionality
-    if (refreshBtn) {
-        refreshBtn.addEventListener('click', () => {
-            loadBookings();
-            showNotification('success', 'Refreshed', 'Bookings data has been refreshed.');
-        });
-    }
-    
-    // Logout functionality
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-            signOut(auth).then(() => {
-                window.location.href = 'login.html';
-            }).catch((error) => {
-                showNotification('error', 'Logout Error', 'Failed to log out. Please try again.');
-            });
-        });
-    }
-    
-    // Load bookings when page loads
-    loadBookings();
-}
-
-// Check authentication state
-onAuthStateChanged(auth, (user) => {
-    if (user && window.location.pathname.endsWith('login.html')) {
-        // User is signed in and on login page, redirect to admin
-        window.location.href = 'admin.html';
-    } else if (!user && window.location.pathname.endsWith('admin.html')) {
-        // User is not signed in and on admin page, redirect to login
-        window.location.href = 'login.html';
-    }
-});

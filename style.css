@@ -1069,8 +1069,6 @@ p {
   color: rgba(255, 255, 255, 0.9);
 }
 
-
-
 /* ===== CONTACT PAGE SPECIFIC STYLES ===== */
 .contact-container {
     max-width: 1200px;
@@ -1416,10 +1414,6 @@ p {
     color: var(--text);
     line-height: 1.6;
 }
-
-
-
-
 
 /* ===== GALLERY PAGE SPECIFIC STYLES ===== */
 .gallery-container {
@@ -1789,9 +1783,6 @@ p {
     box-shadow: 0 15px 40px rgba(139, 95, 191, 0.4);
 }
 
-
-
-
 /* ===== BOOKING PAGE SPECIFIC STYLES ===== */
 .booking-container {
     max-width: 1200px;
@@ -2144,97 +2135,6 @@ p {
     100% { transform: rotate(360deg); }
 }
 
-/* OTP Modal Specific Styles */
-.otp-modal {
-    max-width: 400px;
-}
-
-.otp-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.otp-icon {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--white);
-    font-size: 2rem;
-    margin: 0 auto 20px;
-}
-
-.otp-header h4 {
-    color: var(--dark);
-    margin-bottom: 10px;
-    font-size: 1.3rem;
-}
-
-.otp-header p {
-    color: var(--text);
-}
-
-#otpPhoneNumber {
-    font-weight: 600;
-    color: var(--primary);
-}
-
-.otp-inputs {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 25px;
-}
-
-.otp-input {
-    width: 50px;
-    height: 50px;
-    border: 2px solid var(--light-alt);
-    border-radius: var(--radius);
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: 600;
-    transition: var(--transition);
-}
-
-.otp-input:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(139, 95, 191, 0.1);
-    transform: scale(1.05);
-}
-
-.otp-timer {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.otp-timer p {
-    color: var(--text);
-}
-
-#otpTimer {
-    font-weight: 600;
-    color: var(--primary);
-}
-
-.otp-resend {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.otp-resend a {
-    color: var(--primary);
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.otp-resend a:hover {
-    text-decoration: underline;
-}
-
 /* Notification Styles */
 .notification {
     position: fixed;
@@ -2300,11 +2200,11 @@ p {
     font-size: 0.9rem;
 }
 
-
-
-
-
 /* ===== LOGIN PAGE STYLES ===== */
+:root {
+    --success: #4cc9f0;
+}
+
 .login-body {
     background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     min-height: 100vh;
@@ -2551,7 +2451,7 @@ p {
 .login-footer {
     text-align: center;
     padding-top: 20px;
-    border-top: 1px solid #cf3946;
+    border-top: 1px solid #e9ecef;
 }
 
 .login-footer p {
@@ -2567,7 +2467,7 @@ p {
 
 /* Admin Header */
 .admin-header {
-    background: white;
+    background: var(--bg);
     box-shadow: var(--shadow);
     padding: 20px 30px;
     display: flex;
@@ -2627,7 +2527,7 @@ p {
 }
 
 .admin-user:hover {
-    background: #236ab0;
+    background: #e9ecef;
 }
 
 .user-avatar {
@@ -2672,7 +2572,7 @@ p {
 }
 
 .logout-btn:hover {
-    background: #cfc2c2;
+    background: #d32f2f;
     transform: translateY(-2px);
 }
 
@@ -2849,7 +2749,7 @@ p {
 
 .bookings-table td {
     padding: 18px 20px;
-    border-bottom: 1px solid #587ea3;
+    border-bottom: 1px solid #e9ecef;
     vertical-align: top;
 }
 
@@ -2938,21 +2838,21 @@ p {
 
 .action-btn.edit {
     background: var(--warning);
-    color: rgb(175, 17, 17);
+    color: white;
 }
 
 .action-btn.edit:hover {
-    background: #b4710c;
+    background: #e68a00;
     transform: translateY(-2px);
 }
 
 .action-btn.delete {
     background: var(--error);
-    color: rgb(2, 174, 134);
+    color: white;
 }
 
 .action-btn.delete:hover {
-    background: #c37d7d;
+    background: #d32f2f;
     transform: translateY(-2px);
 }
 
@@ -2973,215 +2873,4 @@ p {
     font-size: 1.4rem;
     margin-bottom: 10px;
     color: var(--dark);
-}
-
-/* Notification */
-.notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: var(--bg);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: var(--shadow-lg);
-    border-left: 4px solid var(--success);
-    transform: translateX(400px);
-    transition: var(--transition);
-    z-index: 1000;
-    max-width: 300px;
-}
-
-.notification.show {
-    transform: translateX(0);
-}
-
-.notification.success {
-    border-left-color: var(--success);
-}
-
-.notification.error {
-    border-left-color: var(--error);
-}
-
-.notification.warning {
-    border-left-color: var(--warning);
-}
-
-.notification-content {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.notification-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-}
-
-.notification.success .notification-icon {
-    background: rgba(76, 201, 240, 0.1);
-    color: var(--success);
-}
-
-.notification.error .notification-icon {
-    background: rgba(230, 57, 70, 0.1);
-    color: var(--error);
-}
-
-.notification.warning .notification-icon {
-    background: rgba(248, 150, 30, 0.1);
-    color: var(--warning);
-}
-
-.notification-text h4 {
-    color: var(--dark);
-    margin-bottom: 4px;
-    font-size: 1rem;
-}
-
-.notification-text p {
-    color: var(--text);
-    font-size: 0.9rem;
-}
-
-/* Modal */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.modal.show {
-    display: flex;
-}
-
-.modal-content {
-    background: var(--bg);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-lg);
-    width: 100%;
-    max-width: 500px;
-    max-height: 90vh;
-    overflow-y: auto;
-}
-
-.modal-header {
-    padding: 25px 30px;
-    border-bottom: 1px solid #e9ecef;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.modal-title {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--dark);
-}
-
-.modal-close {
-    background: none;
-    border: none;
-    font-size: 1.2rem;
-    color: var(--text-light);
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.modal-close:hover {
-    color: var(--error);
-}
-
-.modal-body {
-    padding: 30px;
-}
-
-.modal-footer {
-    padding: 20px 30px;
-    border-top: 1px solid #e9ecef;
-    display: flex;
-    justify-content: flex-end;
-    gap: 15px;
-}
-
-.btn {
-    padding: 12px 24px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.btn-primary {
-    background: var(--primary);
-    color: white;
-}
-
-.btn-primary:hover {
-    background: var(--primary-dark);
-}
-
-.btn-secondary {
-    background: var(--bg-secondary);
-    color: var(--text);
-}
-
-.btn-secondary:hover {
-    background: #e9ecef;
-}
-
-.btn-danger {
-    background: var(--error);
-    color: white;
-}
-
-.btn-danger:hover {
-    background: #d32f2f;
-}
-
-/* Form Groups */
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: var(--dark);
-    font-size: 0.9rem;
-}
-
-.form-control {
-    width: 100%;
-    padding: 12px 16px;
-    border: 2px solid #e9ecef;
-    border-radius: 10px;
-    font-size: 0.9rem;
-    transition: var(--transition);
-    background: var(--bg);
-    outline: none;
-    color: var(--text);
-}
-
-.form-control:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
 }
