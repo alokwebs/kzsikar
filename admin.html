@@ -4,589 +4,140 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - KZ Events Sikar</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="media.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        :root {
-            --primary: #667eea;
-            --secondary: #764ba2;
-            --accent: #ff6b35;
-            --success: #48bb78;
-            --warning: #ed8936;
-            --error: #f56565;
-            --dark: #2d3748;
-            --light: #f7fafc;
-            --text: #4a5568;
-        }
-
-        body {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            min-height: 100vh;
-            color: var(--dark);
-        }
-
-        .admin-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Header */
-        .admin-header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 25px 30px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-left: 4px solid var(--accent);
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--accent), #ff8e53);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 900;
-            font-size: 1.3rem;
-            font-family: 'Arial Black', sans-serif;
-        }
-
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.2;
-        }
-
-        .events {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--dark);
-        }
-
-        .sikar {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--accent);
-        }
-
-        .admin-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        .admin-subtitle {
-            color: var(--text);
-            font-size: 1rem;
-        }
-
-        .stats {
-            display: flex;
-            gap: 20px;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 15px 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            text-align: center;
-            border-left: 4px solid var(--primary);
-        }
-
-        .stat-number {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text);
-        }
-
-        /* Main Content */
-        .admin-main {
-            display: grid;
-            grid-template-columns: 1fr 350px;
-            gap: 25px;
-        }
-
-        /* Bookings Table */
-        .bookings-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .section-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        .search-box {
-            display: flex;
-            align-items: center;
-            background: white;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 8px 15px;
-            gap: 10px;
-        }
-
-        .search-box input {
-            border: none;
-            outline: none;
-            font-size: 0.9rem;
-            width: 200px;
-        }
-
-        .bookings-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .bookings-table th {
-            background: var(--light);
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            color: var(--dark);
-            border-bottom: 2px solid #e2e8f0;
-        }
-
-        .bookings-table td {
-            padding: 15px;
-            border-bottom: 1px solid #e2e8f0;
-            vertical-align: top;
-        }
-
-        .booking-row:hover {
-            background: var(--light);
-        }
-
-        .client-info {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .client-name {
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        .client-phone {
-            color: var(--text);
-            font-size: 0.9rem;
-        }
-
-        .event-date {
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        .event-address {
-            color: var(--text);
-            font-size: 0.9rem;
-            max-width: 200px;
-        }
-
-        .created-at {
-            color: var(--text);
-            font-size: 0.85rem;
-        }
-
-        .actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn {
-            padding: 8px 12px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .btn-edit {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-edit:hover {
-            background: #5a6fd8;
-            transform: translateY(-2px);
-        }
-
-        .btn-delete {
-            background: var(--error);
-            color: white;
-        }
-
-        .btn-delete:hover {
-            background: #e53e3e;
-            transform: translateY(-2px);
-        }
-
-        /* Edit Form */
-        .edit-form-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            height: fit-content;
-            position: sticky;
-            top: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--dark);
-            font-size: 0.9rem;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            background: white;
-            outline: none;
-        }
-
-        .form-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .form-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 25px;
-        }
-
-        .btn-save {
-            background: var(--success);
-            color: white;
-            flex: 1;
-        }
-
-        .btn-save:hover {
-            background: #38a169;
-        }
-
-        .btn-cancel {
-            background: var(--text);
-            color: white;
-            flex: 1;
-        }
-
-        .btn-cancel:hover {
-            background: #718096;
-        }
-
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border-left: 4px solid var(--success);
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-            z-index: 1000;
-            max-width: 300px;
-        }
-
-        .notification.show {
-            transform: translateX(0);
-        }
-
-        .notification.success {
-            border-left-color: var(--success);
-        }
-
-        .notification.error {
-            border-left-color: var(--error);
-        }
-
-        .notification.warning {
-            border-left-color: var(--warning);
-        }
-
-        .notification-content {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .notification-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .notification.success .notification-icon {
-            background: #c6f6d5;
-            color: var(--success);
-        }
-
-        .notification.error .notification-icon {
-            background: #fed7d7;
-            color: var(--error);
-        }
-
-        .notification.warning .notification-icon {
-            background: #feebc8;
-            color: var(--warning);
-        }
-
-        .notification-text h4 {
-            color: var(--dark);
-            margin-bottom: 4px;
-            font-size: 1rem;
-        }
-
-        .notification-text p {
-            color: var(--text);
-            font-size: 0.9rem;
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--text);
-        }
-
-        .empty-state i {
-            font-size: 4rem;
-            color: #e2e8f0;
-            margin-bottom: 20px;
-        }
-
-        .empty-state h3 {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-            color: var(--dark);
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .admin-main {
-                grid-template-columns: 1fr;
-            }
-            
-            .edit-form-section {
-                position: static;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .admin-header {
-                flex-direction: column;
-                gap: 20px;
-                text-align: center;
-            }
-            
-            .stats {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .section-header {
-                flex-direction: column;
-                gap: 15px;
-                align-items: flex-start;
-            }
-            
-            .search-box {
-                width: 100%;
-            }
-            
-            .search-box input {
-                width: 100%;
-            }
-            
-            .bookings-table {
-                display: block;
-                overflow-x: auto;
-            }
-        }
-    </style>
 </head>
-<body>
-    <div class="admin-container">
-        <!-- Header -->
-        <div class="admin-header">
-            <div class="header-left">
-                <div class="logo">
-                    <div class="logo-icon">KZ</div>
-                    <div class="logo-text">
-                        <span class="events">EVENTS</span>
-                        <span class="sikar">SIKAR</span>
-                    </div>
+<body class="admin-body">
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="admin-logo">
+            <div class="admin-logo-icon">
+                <i class="fas fa-calendar-alt"></i>
+            </div>
+            <div class="admin-logo-text">
+                <h1>KZ Events</h1>
+                <p>Sikar</p>
+            </div>
+        </div>
+        
+        <nav class="admin-nav">
+            <div class="admin-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
                 </div>
-                <div>
-                    <h1 class="admin-title">Admin Dashboard</h1>
-                    <p class="admin-subtitle">Manage your event bookings</p>
+                <div class="user-info">
+                    <div class="user-name">Admin User</div>
+                    <div class="user-role">Administrator</div>
                 </div>
             </div>
-            <div class="stats">
-                <div class="stat-card">
-                    <div class="stat-number" id="totalBookings">0</div>
-                    <div class="stat-label">Total Bookings</div>
+            <button class="logout-btn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="admin-container">
+        <!-- Stats Section -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon primary">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number" id="totalBookings">0</div>
+                        <div class="stat-label">Total Bookings</div>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="todayBookings">0</div>
-                    <div class="stat-label">Today</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon success">
+                        <i class="fas fa-calendar-day"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number" id="todayBookings">0</div>
+                        <div class="stat-label">Today's Bookings</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon warning">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number" id="pendingCalls">0</div>
+                        <div class="stat-label">Pending Calls</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon accent">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number" id="messagesSent">0</div>
+                        <div class="stat-label">Messages Sent</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Main Content -->
-        <div class="admin-main">
-            <!-- Bookings Table -->
-            <div class="bookings-section">
-                <div class="section-header">
-                    <h2 class="section-title">All Bookings</h2>
+        <!-- Bookings Section -->
+        <section class="bookings-section">
+            <div class="section-header">
+                <h2 class="section-title">All Bookings</h2>
+                <div class="section-actions">
                     <div class="search-box">
                         <i class="fas fa-search"></i>
                         <input type="text" id="searchInput" placeholder="Search bookings...">
                     </div>
+                    <button class="refresh-btn" id="refreshBtn">
+                        <i class="fas fa-sync-alt"></i>
+                        <span>Refresh</span>
+                    </button>
                 </div>
+            </div>
+            
+            <div class="table-container">
+                <table class="bookings-table">
+                    <thead>
+                        <tr>
+                            <th>Client Information</th>
+                            <th>Event Date</th>
+                            <th>Address</th>
+                            <th>Created At</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookingsTableBody">
+                        <!-- Data will be populated by JavaScript -->
+                    </tbody>
+                </table>
                 
-                <div class="table-container">
-                    <table class="bookings-table">
-                        <thead>
-                            <tr>
-                                <th>Client Information</th>
-                                <th>Event Date</th>
-                                <th>Address</th>
-                                <th>Created At</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="bookingsTableBody">
-                            <!-- Data will be populated by JavaScript -->
-                        </tbody>
-                    </table>
-                    
-                    <!-- Empty State -->
-                    <div class="empty-state" id="emptyState" style="display: none;">
-                        <i class="fas fa-calendar-times"></i>
-                        <h3>No Bookings Found</h3>
-                        <p>There are no bookings to display at the moment.</p>
-                    </div>
+                <!-- Empty State -->
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <i class="fas fa-calendar-times"></i>
+                    <h3>No Bookings Found</h3>
+                    <p>There are no bookings to display at the moment.</p>
                 </div>
             </div>
-
-            <!-- Edit Form -->
-            <div class="edit-form-section">
-                <h2 class="section-title" style="margin-bottom: 25px;">Edit Booking</h2>
-                <form id="editForm">
-                    <input type="hidden" id="editKey">
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="editName">Full Name</label>
-                        <input type="text" id="editName" class="form-input" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="editPhone">Phone Number</label>
-                        <input type="tel" id="editPhone" class="form-input" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="editAddress">Event Address</label>
-                        <input type="text" id="editAddress" class="form-input" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="editDate">Event Date</label>
-                        <input type="date" id="editDate" class="form-input" required>
-                    </div>
-                    
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-save">
-                            <i class="fas fa-save"></i>
-                            Save Changes
-                        </button>
-                        <button type="button" class="btn btn-cancel" id="cancelEdit">
-                            <i class="fas fa-times"></i>
-                            Cancel
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <!-- Notification -->
     <div class="notification" id="notification">
         <div class="notification-content">
             <div class="notification-icon">
-                <i class="fas fa-check" id="notificationIcon"></i>
+                <i class="fas fa-check"></i>
             </div>
             <div class="notification-text">
                 <h4 id="notificationTitle">Success!</h4>
@@ -595,237 +146,6 @@
         </div>
     </div>
 
-    <!-- Firebase SDK -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-        import { getDatabase, ref, onValue, update, remove } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-database.js";
-
-        // Firebase Config
-        const firebaseConfig = {
-            apiKey: "AIzaSyA3GlG5vRRZX_hWJskIrjCkx4Zrua7wKsM",
-            authDomain: "kz-sikar.firebaseapp.com",
-            databaseURL: "https://kz-sikar-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "kz-sikar",
-            storageBucket: "kz-sikar.firebasestorage.app",
-            messagingSenderId: "896083049571",
-            appId: "1:896083049571:web:89baf134bfdaec78544c56",
-            measurementId: "G-B6RFTZPR3X"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-
-        // DOM Elements
-        const bookingsTableBody = document.getElementById('bookingsTableBody');
-        const emptyState = document.getElementById('emptyState');
-        const editForm = document.getElementById('editForm');
-        const searchInput = document.getElementById('searchInput');
-        const totalBookings = document.getElementById('totalBookings');
-        const todayBookings = document.getElementById('todayBookings');
-
-        // Current editing key
-        let currentEditKey = null;
-
-        // Show notification
-        function showNotification(type, title, message) {
-            const notification = document.getElementById('notification');
-            const notificationIcon = document.getElementById('notificationIcon');
-            const notificationTitle = document.getElementById('notificationTitle');
-            const notificationMessage = document.getElementById('notificationMessage');
-            
-            notification.className = `notification ${type}`;
-            notificationTitle.textContent = title;
-            notificationMessage.textContent = message;
-            
-            if (type === 'success') {
-                notificationIcon.className = 'fas fa-check';
-            } else if (type === 'error') {
-                notificationIcon.className = 'fas fa-exclamation-triangle';
-            } else {
-                notificationIcon.className = 'fas fa-info-circle';
-            }
-            
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 4000);
-        }
-
-        // Format date
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('en-IN', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric'
-            });
-        }
-
-        // Load bookings from Firebase
-        const bookingsRef = ref(db, "bookings");
-        onValue(bookingsRef, (snapshot) => {
-            const bookings = [];
-            let todayCount = 0;
-            const today = new Date().toDateString();
-            
-            snapshot.forEach((childSnapshot) => {
-                const booking = childSnapshot.val();
-                booking.key = childSnapshot.key;
-                bookings.push(booking);
-                
-                // Count today's bookings
-                const bookingDate = new Date(booking.createdAt).toDateString();
-                if (bookingDate === today) {
-                    todayCount++;
-                }
-            });
-            
-            // Update stats
-            totalBookings.textContent = bookings.length;
-            todayBookings.textContent = todayCount;
-            
-            // Display bookings
-            displayBookings(bookings);
-        });
-
-        // Display bookings in table
-        function displayBookings(bookings) {
-            if (bookings.length === 0) {
-                emptyState.style.display = 'block';
-                bookingsTableBody.innerHTML = '';
-                return;
-            }
-            
-            emptyState.style.display = 'none';
-            
-            const searchTerm = searchInput.value.toLowerCase();
-            const filteredBookings = bookings.filter(booking => 
-                booking.name.toLowerCase().includes(searchTerm) ||
-                booking.phone.includes(searchTerm) ||
-                booking.address.toLowerCase().includes(searchTerm) ||
-                booking.date.includes(searchTerm)
-            );
-            
-            bookingsTableBody.innerHTML = filteredBookings.map(booking => `
-                <tr class="booking-row">
-                    <td>
-                        <div class="client-info">
-                            <div class="client-name">${booking.name}</div>
-                            <div class="client-phone">${booking.phone}</div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="event-date">${formatDate(booking.date)}</div>
-                    </td>
-                    <td>
-                        <div class="event-address">${booking.address}</div>
-                    </td>
-                    <td>
-                        <div class="created-at">${booking.createdAt}</div>
-                    </td>
-                    <td>
-                        <div class="actions">
-                            <button class="btn btn-edit" onclick="editBooking('${booking.key}')">
-                                <i class="fas fa-edit"></i>
-                                Edit
-                            </button>
-                            <button class="btn btn-delete" onclick="deleteBooking('${booking.key}', '${booking.name}')">
-                                <i class="fas fa-trash"></i>
-                                Delete
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        // Edit booking
-        window.editBooking = function(key) {
-            const bookingRef = ref(db, `bookings/${key}`);
-            onValue(bookingRef, (snapshot) => {
-                const booking = snapshot.val();
-                if (booking) {
-                    currentEditKey = key;
-                    document.getElementById('editKey').value = key;
-                    document.getElementById('editName').value = booking.name;
-                    document.getElementById('editPhone').value = booking.phone;
-                    document.getElementById('editAddress').value = booking.address;
-                    document.getElementById('editDate').value = booking.date;
-                    
-                    // Scroll to form
-                    document.querySelector('.edit-form-section').scrollIntoView({ 
-                        behavior: 'smooth' 
-                    });
-                }
-            }, { onlyOnce: true });
-        };
-
-        // Delete booking
-        window.deleteBooking = function(key, name) {
-            if (confirm(`Are you sure you want to delete booking for ${name}?`)) {
-                const bookingRef = ref(db, `bookings/${key}`);
-                remove(bookingRef)
-                    .then(() => {
-                        showNotification('success', 'Booking Deleted', `Booking for ${name} has been deleted successfully.`);
-                    })
-                    .catch((error) => {
-                        showNotification('error', 'Error', 'Failed to delete booking. Please try again.');
-                    });
-            }
-        };
-
-        // Update booking
-        editForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            if (!currentEditKey) return;
-            
-            const updatedData = {
-                name: document.getElementById('editName').value.trim(),
-                phone: document.getElementById('editPhone').value.trim(),
-                address: document.getElementById('editAddress').value.trim(),
-                date: document.getElementById('editDate').value,
-                updatedAt: new Date().toLocaleString()
-            };
-            
-            const bookingRef = ref(db, `bookings/${currentEditKey}`);
-            update(bookingRef, updatedData)
-                .then(() => {
-                    showNotification('success', 'Booking Updated', 'Booking details have been updated successfully.');
-                    editForm.reset();
-                    currentEditKey = null;
-                })
-                .catch((error) => {
-                    showNotification('error', 'Error', 'Failed to update booking. Please try again.');
-                });
-        });
-
-        // Cancel edit
-        document.getElementById('cancelEdit').addEventListener('click', () => {
-            editForm.reset();
-            currentEditKey = null;
-            showNotification('warning', 'Edit Cancelled', 'Booking edit has been cancelled.');
-        });
-
-        // Search functionality
-        searchInput.addEventListener('input', () => {
-            // Re-trigger display with current data
-            const bookingsRef = ref(db, "bookings");
-            onValue(bookingsRef, (snapshot) => {
-                const bookings = [];
-                snapshot.forEach((childSnapshot) => {
-                    const booking = childSnapshot.val();
-                    booking.key = childSnapshot.key;
-                    bookings.push(booking);
-                });
-                displayBookings(bookings);
-            }, { onlyOnce: true });
-        });
-
-        // Set minimum date for edit form
-        document.getElementById('editDate').min = new Date().toISOString().split('T')[0];
-    </script>
+    <script type="module" src="hello.js"></script>
 </body>
 </html>

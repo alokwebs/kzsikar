@@ -5,347 +5,187 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Your Event - KZ Events Sikar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .booking-container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-            width: 100%;
-            max-width: 500px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .booking-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #ff6b35, #ff8e53, #ff6b35);
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #ff6b35, #ff8e53);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 900;
-            font-size: 1.1rem;
-            font-family: 'Arial Black', sans-serif;
-        }
-
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.2;
-        }
-
-        .events {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #2d3748;
-        }
-
-        .sikar {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #ff6b35;
-        }
-
-        .header h1 {
-            color: #2d3748;
-            font-size: 1.8rem;
-            margin-bottom: 8px;
-        }
-
-        .header p {
-            color: #718096;
-            font-size: 0.95rem;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-            position: relative;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            color: #4a5568;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        .input-wrapper {
-            position: relative;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 15px 45px 15px 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: white;
-            outline: none;
-        }
-
-        .form-input:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .input-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #a0aec0;
-            font-size: 1.1rem;
-        }
-
-        .form-input:focus + .input-icon {
-            color: #667eea;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #ff6b35, #ff8e53);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
-        }
-
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-
-        .submit-btn.loading {
-            background: #a0aec0;
-            cursor: not-allowed;
-        }
-
-        .submit-btn.loading i {
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Notification Styles */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border-left: 4px solid #48bb78;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-            z-index: 1000;
-            max-width: 300px;
-        }
-
-        .notification.show {
-            transform: translateX(0);
-        }
-
-        .notification.success {
-            border-left-color: #48bb78;
-        }
-
-        .notification.error {
-            border-left-color: #f56565;
-        }
-
-        .notification-content {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .notification-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .notification.success .notification-icon {
-            background: #c6f6d5;
-            color: #48bb78;
-        }
-
-        .notification.error .notification-icon {
-            background: #fed7d7;
-            color: #f56565;
-        }
-
-        .notification-text h4 {
-            color: #2d3748;
-            margin-bottom: 4px;
-            font-size: 1rem;
-        }
-
-        .notification-text p {
-            color: #718096;
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 480px) {
-            .booking-container {
-                padding: 30px 25px;
-            }
-
-            .header h1 {
-                font-size: 1.5rem;
-            }
-
-            .form-input {
-                padding: 12px 40px 12px 12px;
-            }
-        }
-
-        .back-home {
-            text-align: center;
-            margin-top: 25px;
-        }
-
-        .back-home a {
-            color: #667eea;
-            text-decoration: none;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            transition: color 0.3s ease;
-        }
-
-        .back-home a:hover {
-            color: #ff6b35;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="media.css">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
 </head>
 <body>
-    <div class="booking-container">
-        <div class="header">
-            <div class="logo">
-                <div class="logo-icon">KZ</div>
-                <div class="logo-text">
-                    <span class="events">EVENTS</span>
-                    <span class="sikar">SIKAR</span>
+    <!-- Header Section -->
+    <header class="navbar">
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">
+                    <div class="logo-icon">KZ</div>
+                    <div class="logo-text">
+                        <span class="events">EVENTS</span>
+                        <span class="sikar">SIKAR</span>
+                    </div>
                 </div>
+
+                <div class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <nav class="nav-links" id="navLinks">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="booking.html" class="active">Booking</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                    <div class="owner">
+                        <a href="login.html"><img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png" alt="Owner" title="Owner Dashboard"></a>
+                    </div>
+                </nav>
             </div>
-            <h1>Book Your Event</h1>
-            <p>Fill in the details below to reserve your special day</p>
+        </div>
+    </header>
+
+    <!-- Booking Page Content -->
+    <div class="booking-container">
+        <div class="booking-header">
+            <h1>Book Your Dream Event</h1>
+            <p class="tagline">Select your preferred date and let us create magic for you</p>
         </div>
 
-        <form id="bookingForm">
-            <div class="form-group">
-                <label class="form-label" for="name">Full Name</label>
-                <div class="input-wrapper">
-                    <input type="text" id="name" class="form-input" placeholder="Enter your full name" required>
-                    <i class="fas fa-user input-icon"></i>
+        <!-- Calendar Section -->
+        <div class="calendar-section">
+            <div class="calendar-header">
+                <button class="nav-btn" id="prevMonth">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <h2 id="currentMonth">November 2024</h2>
+                <button class="nav-btn" id="nextMonth">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <div class="calendar-grid">
+                <div class="calendar-weekdays">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                </div>
+                <div  class="calendar-days" id="calendarDays" style="color: brown;">
+                    <!-- Calendar days will be generated by JavaScript -->
                 </div>
             </div>
-
-            <div class="form-group">
-                <label class="form-label" for="phone">Phone Number</label>
-                <div class="input-wrapper">
-                    <input type="tel" id="phone" class="form-input" placeholder="Enter your phone number" required>
-                    <i class="fas fa-phone input-icon"></i>
+            
+            <div class="calendar-legend">
+                <div class="legend-item">
+                    <div class="legend-color available"></div>
+                    <span>Available</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color booked"></div>
+                    <span>Booked</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color selected"></div>
+                    <span>Selected</span>
                 </div>
             </div>
+        </div>
 
-            <div class="form-group">
-                <label class="form-label" for="address">Event Address</label>
-                <div class="input-wrapper">
-                    <input type="text" id="address" class="form-input" placeholder="Enter event venue address" required>
-                    <i class="fas fa-map-marker-alt input-icon"></i>
+        <!-- Booking Form Modal -->
+        <div class="modal-overlay" id="modalOverlay">
+            <div class="booking-modal">
+                <div class="modal-header">
+                    <div class="logo">
+                        <div class="logo-icon">KZ</div>
+                        <div class="logo-text">
+                            <span class="events">EVENTS</span>
+                            <span class="sikar">SIKAR</span>
+                        </div>
+                    </div>
+                    <button class="modal-close" id="modalClose">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="modal-content">
+                    <h3>Complete Your Booking</h3>
+                    <p class="selected-date">Selected Date: <span id="displayDate"></span></p>
+                    
+                    <form id="bookingForm">
+                        <div class="form-group">
+                            <label class="form-label" for="name">Full Name</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="name" class="form-input" placeholder="Enter your full name" required>
+                                <i class="fas fa-user input-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="phone">Phone Number</label>
+                            <div class="input-wrapper">
+                                <input type="tel" id="phone" class="form-input" placeholder="Enter your phone number" required>
+                                <i class="fas fa-phone input-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email Address</label>
+                            <div class="input-wrapper">
+                                <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+                                <i class="fas fa-envelope input-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="eventType">Event Type</label>
+                            <div class="input-wrapper">
+                                <select id="eventType" class="form-input" required>
+                                    <option value="">Select event type</option>
+                                    <option value="wedding">Wedding</option>
+                                    <option value="corporate">Corporate Event</option>
+                                    <option value="birthday">Birthday Party</option>
+                                    <option value="anniversary">Anniversary</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <i class="fas fa-calendar input-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="guests">Number of Guests</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="guests" class="form-input" placeholder="Estimated number of guests" required>
+                                <i class="fas fa-users input-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="address">Event Address</label>
+                            <div class="input-wrapper">
+                                <textarea id="address" class="form-textarea" placeholder="Enter event venue address" required></textarea>
+                                <i class="fas fa-map-marker-alt input-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="message">Special Requirements</label>
+                            <textarea id="message" class="form-textarea" placeholder="Any special requirements or notes..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <i class="fas fa-calendar-check"></i>
+                            Confirm Booking
+                        </button>
+                    </form>
                 </div>
             </div>
-
-            <div class="form-group">
-                <label class="form-label" for="date">Event Date</label>
-                <div class="input-wrapper">
-                    <input type="date" id="date" class="form-input" required>
-                    <i class="fas fa-calendar input-icon"></i>
-                </div>
-            </div>
-
-            <button type="submit" class="submit-btn" id="submitBtn">
-                <i class="fas fa-paper-plane"></i>
-                Book Now
-            </button>
-        </form>
-
-        <div class="back-home">
-            <a href="index.html">
-                <i class="fas fa-arrow-left"></i>
-                Back to Home
-            </a>
         </div>
     </div>
 
@@ -357,18 +197,98 @@
             </div>
             <div class="notification-text">
                 <h4 id="notificationTitle">Success!</h4>
-                <p id="notificationMessage">Your booking has been submitted successfully.</p>
+                <p id="notificationMessage">Your booking has been confirmed successfully.</p>
             </div>
         </div>
     </div>
 
-    <!-- Firebase SDK -->
-    <script type="module">
-        // ✅ Firebase Imports
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-        import { getDatabase, ref, push, onValue, set } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-database.js";
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo">
+                            <div class="logo-icon">KZ</div>
+                            <div class="logo-text">
+                                <span class="events">EVENTS</span>
+                                <span class="sikar">SIKAR</span>
+                            </div>
+                        </div>
+                        <p>Creating unforgettable moments through exceptional event planning and execution.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="booking.html">Booking</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Wedding Planning</a></li>
+                        <li><a href="#">Corporate Events</a></li>
+                        <li><a href="#">Birthday Parties</a></li>
+                        <li><a href="#">Anniversary Events</a></li>
+                        <li><a href="#">Event Decor</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Sikar, Rajasthan, India</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 98765 43210</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@kzevents.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 KZ Events Sikar. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-        // ✅ Your Firebase Config
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/919876543210" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <a href="booking.html" class="booking-float">
+        <i class="fas fa-calendar-plus"></i>
+        <span>Book Now</span>
+    </a>
+
+    <!-- Firebase SDK -->
+    <script>
+        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyA3GlG5vRRZX_hWJskIrjCkx4Zrua7wKsM",
             authDomain: "kz-sikar.firebaseapp.com",
@@ -380,90 +300,11 @@
             measurementId: "G-B6RFTZPR3X"
         };
 
-        // ✅ Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-
-        // HTML Elements
-        const form = document.getElementById("bookingForm");
-        const submitBtn = document.getElementById("submitBtn");
-        const notification = document.getElementById("notification");
-        const notificationTitle = document.getElementById("notificationTitle");
-        const notificationMessage = document.getElementById("notificationMessage");
-
-        // Show notification function
-        function showNotification(type, title, message) {
-            notification.className = `notification ${type}`;
-            notificationTitle.textContent = title;
-            notificationMessage.textContent = message;
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 4000);
-        }
-
-        // 🔹 Form Submit Event
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            const name = document.getElementById("name").value.trim();
-            const phone = document.getElementById("phone").value.trim();
-            const address = document.getElementById("address").value.trim();
-            const date = document.getElementById("date").value.trim();
-
-            if (!name || !phone || !address || !date) {
-                showNotification('error', 'Error', 'Please fill all fields!');
-                return;
-            }
-
-            // Show loading state
-            submitBtn.classList.add('loading');
-            submitBtn.innerHTML = '<i class="fas fa-spinner"></i> Processing...';
-
-            // 🔹 Check if date already booked
-            const bookingsRef = ref(db, "bookings");
-            let alreadyBooked = false;
-
-            onValue(bookingsRef, (snapshot) => {
-                snapshot.forEach((childSnapshot) => {
-                    const data = childSnapshot.val();
-                    if (data.date === date) {
-                        alreadyBooked = true;
-                    }
-                });
-            }, { onlyOnce: true });
-
-            setTimeout(() => {
-                if (alreadyBooked) {
-                    showNotification('error', 'Date Booked', 'This date is already booked! Please choose another date.');
-                    submitBtn.classList.remove('loading');
-                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Book Now';
-                } else {
-                    const newRef = push(bookingsRef);
-                    set(newRef, {
-                        name,
-                        phone,
-                        address,
-                        date,
-                        createdAt: new Date().toLocaleString()
-                    }).then(() => {
-                        showNotification('success', 'Booking Confirmed!', 'Your event has been booked successfully. We will contact you soon.');
-                        form.reset();
-                    }).catch((error) => {
-                        showNotification('error', 'Error', 'Failed to book. Please try again.');
-                    }).finally(() => {
-                        submitBtn.classList.remove('loading');
-                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Book Now';
-                    });
-                }
-            }, 1000);
-        });
-
-        // Set minimum date to today
-        const dateInput = document.getElementById('date');
-        const today = new Date().toISOString().split('T')[0];
-        dateInput.min = today;
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
     </script>
+
+    <script src="hello.js"></script>
 </body>
 </html>

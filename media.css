@@ -1,116 +1,754 @@
-/* SMALL MOBILE */
-    @media (max-width: 600px) {
-      .navbar {
-        padding: 0 15px;
-      }
+/* ================== RESPONSIVE STYLES =================== */
 
-      .logo h1 {
-        font-size: 1.3rem;
-      }
+/* Large devices (1024px and down) */
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 3rem;
+  }
+  
+  h2 {
+    font-size: 2.2rem;
+  }
+  
+  .hero-content h1 {
+    font-size: 3.2rem;
+  }
+  
+  .stats-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
-      .menu-toggle {
+/* Medium devices (768px and down) */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+  
+  .nav-links {
+    position: fixed;
+    top: 80px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 80px);
+    background: var(--white);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    transition: var(--transition);
+    padding-top: 3rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .nav-links.active {
+    left: 0;
+  }
+  
+  .nav-links ul {
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .nav-links a {
+    font-size: 1.2rem;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-content p {
+    font-size: 1.1rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .testimonials-slider {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .footer-links {
+    justify-content: center;
+  }
+  
+  /* About page specific responsive styles */
+  .hero-section {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+    padding: 40px 30px;
+  }
+  
+  .mission-vision {
+    grid-template-columns: 1fr;
+  }
+  
+  .about-header {
+    padding: 100px 0 40px;
+  }
+  
+  .about-header h1 {
+    font-size: 2.8rem;
+  }
+}
+
+/* Small devices (600px and down) */
+@media (max-width: 600px) {
+  .stats-section {
+    grid-template-columns: 1fr;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+}
+
+/* Extra small devices (480px and down) */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 15px;
+  }
+  
+  h1 {
+    font-size: 2.2rem;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+  }
+  
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+  
+  .section-header {
+    margin-bottom: 3rem;
+  }
+  
+  .services, .portfolio, .testimonials, .cta {
+    padding: 70px 0;
+  }
+  
+  .service-card, .testimonial-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .cta-content h2 {
+    font-size: 2.2rem;
+  }
+  
+  .cta-content p {
+    font-size: 1.1rem;
+  }
+  
+  .whatsapp-float {
+    bottom: 20px;
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    font-size: 1.3rem;
+  }
+  
+  .booking-float {
+    bottom: 85px;
+    right: 20px;
+    padding: 10px 18px;
+    font-size: 0.9rem;
+  }
+  
+  /* About page specific responsive styles */
+  .about-header h1 {
+    font-size: 2.2rem;
+  }
+  
+  .tagline {
+    font-size: 1.1rem;
+  }
+  
+  .hero-section, .services-section, .team-preview, .cta-section {
+    padding: 30px 20px;
+  }
+  
+  .hero-content h2 {
+    font-size: 1.8rem;
+  }
+  
+  .cta-section h2 {
+    font-size: 2rem;
+  }
+  
+  .cta-section p {
+    font-size: 1.1rem;
+  }
+}
+
+
+
+/* ===== CONTACT PAGE RESPONSIVE STYLES ===== */
+
+/* Large devices (1024px and down) */
+@media (max-width: 1024px) {
+    .contact-main {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .contact-header h1 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Medium devices (768px and down) */
+@media (max-width: 768px) {
+    .contact-container {
+        padding: 20px 15px;
+        margin-top: 80px;
+    }
+    
+    .contact-header h1 {
+        font-size: 2rem;
+    }
+    
+    .member-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .team-section, .form-section, .company-info {
+        padding: 25px;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Small devices (480px and down) */
+@media (max-width: 480px) {
+    .contact-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .team-section, .form-section, .company-info {
+        padding: 20px;
+    }
+    
+    .member-photo {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .member-name {
+        font-size: 1.1rem;
+    }
+    
+    .section-title {
         font-size: 1.6rem;
-      }
+    }
+}
 
-      .owner img {
+
+
+
+
+/* ===== GALLERY PAGE RESPONSIVE STYLES ===== */
+
+/* Large devices (1024px and down) */
+@media (max-width: 1024px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    
+    .gallery-header h1 {
+        font-size: 3rem;
+    }
+}
+
+/* Medium devices (768px and down) */
+@media (max-width: 768px) {
+    .gallery-container {
+        padding: 20px 15px;
+        margin-top: 80px;
+    }
+    
+    .gallery-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .lightbox-nav {
         width: 50px;
         height: 50px;
-      }
-      
-      .kz-logo-text {
-        font-size: 60px;
-      }
-
-      .hero h2 {
-        font-size: 2.5rem;
-      }
-
-      .hero p {
-        font-size: 1.1rem;
-        margin-bottom: 30px;
-      }
-
-      .booking-btn {
-        padding: 15px 35px;
-        font-size: 1.1rem;
-      }
+        font-size: 1.2rem;
     }
-
-
-
- /* Responsive Design */
-@media (max-width: 1024px) {
-  .footer-content {
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-  }
+    
+    .cta-section {
+        padding: 40px 25px;
+    }
+    
+    .cta-section h2 {
+        font-size: 2.2rem;
+    }
 }
 
-@media (max-width: 768px) {
-  .footer {
-    padding: 30px 0 15px;
-  }
-  
-  .footer-content {
-    grid-template-columns: 1fr;
-    gap: 25px;
-    text-align: center;
-  }
-  
-  .footer-section h4::after {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .logo {
-    justify-content: center;
-  }
-  
-  .social-links {
-    justify-content: center;
-  }
-  
-  .footer-bottom-content {
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-  }
-  
-  .legal-links {
-    gap: 15px;
-  }
-}
-
+/* Small devices (480px and down) */
 @media (max-width: 480px) {
-  .footer-content {
-    gap: 20px;
-  }
-  
-  .footer-brand {
-    gap: 12px;
-  }
-  
-  .logos {
-    flex-direction: column;
-    gap: 8px;
-  }
-  
-  .social-links {
-    gap: 8px;
-  }
-  
-  .social-link {
-    width: 32px;
-    height: 32px;
-  }
-  
-  .legal-links {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-  }
+    .gallery-header h1 {
+        font-size: 2rem;
+    }
+    
+    .tagline {
+        font-size: 1.1rem;
+    }
+    
+    .filter-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .lightbox-content {
+        max-width: 95%;
+    }
+    
+    .lightbox-title {
+        font-size: 1.4rem;
+    }
+    
+    .cta-section h2 {
+        font-size: 1.8rem;
+    }
+    
+    .cta-section p {
+        font-size: 1.1rem;
+    }
 }
 
 
 
 
+
+
+/* ===== BOOKING PAGE RESPONSIVE STYLES ===== */
+
+/* Large devices (1024px and down) */
+@media (max-width: 1024px) {
+    .booking-header h1 {
+        font-size: 3rem;
+    }
+    
+    .calendar-section {
+        padding: 30px;
+    }
+}
+
+/* Medium devices (768px and down) */
+@media (max-width: 768px) {
+    .booking-container {
+        padding: 20px 15px;
+        margin-top: 80px;
+    }
+    
+    .booking-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .calendar-section {
+        padding: 25px;
+    }
+    
+    .calendar-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .calendar-legend {
+        gap: 20px;
+    }
+    
+    .modal-content {
+        padding: 25px;
+    }
+    
+    .otp-inputs {
+        gap: 8px;
+    }
+    
+    .otp-input {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* Small devices (480px and down) */
+@media (max-width: 480px) {
+    .booking-header h1 {
+        font-size: 2rem;
+    }
+    
+    .tagline {
+        font-size: 1.1rem;
+    }
+    
+    .calendar-section {
+        padding: 20px;
+    }
+    
+    .calendar-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .calendar-weekdays div {
+        padding: 5px;
+        font-size: 0.9rem;
+    }
+    
+    .calendar-day {
+        font-size: 0.9rem;
+    }
+    
+    .modal-content {
+        padding: 20px;
+    }
+    
+    .form-input, .form-textarea {
+        padding: 12px 40px 12px 12px;
+    }
+    
+    .otp-inputs {
+        gap: 5px;
+    }
+    
+    .otp-input {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .notification {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}
+
+
+
+
+/* ===== RESPONSIVE STYLES ===== */
+
+/* Large Devices (Desktops) */
+@media (max-width: 1200px) {
+    .admin-container {
+        padding: 20px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Medium Devices (Tablets) */
+@media (max-width: 992px) {
+    /* Login Page */
+    .login-card {
+        padding: 30px 25px;
+    }
+    
+    .logo {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .logo-text h1 {
+        font-size: 1.8rem;
+    }
+    
+    /* Admin Dashboard */
+    .admin-header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .admin-nav {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .section-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .search-box input {
+        width: 150px;
+    }
+}
+
+/* Small Devices (Phones) */
+@media (max-width: 768px) {
+    /* Login Page */
+    .login-body {
+        padding: 15px;
+    }
+    
+    .login-card {
+        padding: 25px 20px;
+    }
+    
+    .logo-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+    
+    .logo-text h1 {
+        font-size: 1.6rem;
+    }
+    
+    .login-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .form-input {
+        padding: 14px 16px 14px 45px;
+    }
+    
+    /* Admin Dashboard */
+    .admin-container {
+        padding: 15px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .stat-card {
+        padding: 20px;
+    }
+    
+    .stat-number {
+        font-size: 1.8rem;
+    }
+    
+    .bookings-table {
+        font-size: 0.85rem;
+    }
+    
+    .bookings-table th,
+    .bookings-table td {
+        padding: 12px 15px;
+    }
+    
+    .actions {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .action-btn {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+        justify-content: center;
+    }
+    
+    .admin-user .user-info {
+        display: none;
+    }
+    
+    .logout-btn span {
+        display: none;
+    }
+    
+    .logout-btn {
+        padding: 10px;
+    }
+}
+
+/* Extra Small Devices */
+@media (max-width: 576px) {
+    /* Login Page */
+    .login-card {
+        padding: 20px 15px;
+    }
+    
+    .logo-text h1 {
+        font-size: 1.4rem;
+    }
+    
+    .logo-text p {
+        font-size: 1rem;
+    }
+    
+    .login-header h2 {
+        font-size: 1.2rem;
+    }
+    
+    .input-group {
+        margin-bottom: 20px;
+    }
+    
+    /* Admin Dashboard */
+    .section-actions {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+    
+    .search-box {
+        width: 100%;
+    }
+    
+    .search-box input {
+        width: 100%;
+    }
+    
+    .refresh-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .modal-content {
+        margin: 10px;
+    }
+    
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 20px;
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .notification {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}
+
+/* Very Small Devices */
+@media (max-width: 400px) {
+    .login-card {
+        padding: 20px 15px;
+    }
+    
+    .logo {
+        gap: 8px;
+    }
+    
+    .logo-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+    
+    .logo-text h1 {
+        font-size: 1.3rem;
+    }
+    
+    .admin-logo {
+        gap: 10px;
+    }
+    
+    .admin-logo-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+    
+    .admin-logo-text h1 {
+        font-size: 1.3rem;
+    }
+    
+    .bookings-table {
+        font-size: 0.8rem;
+    }
+    
+    .bookings-table th,
+    .bookings-table td {
+        padding: 10px 12px;
+    }
+    
+    .client-name {
+        font-size: 0.9rem;
+    }
+    
+    .client-phone {
+        font-size: 0.8rem;
+    }
+}
+
+/* Height-based adjustments */
+@media (max-height: 700px) {
+    .login-body {
+        align-items: flex-start;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    
+    .login-card {
+        margin-top: 0;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .login-body {
+        background: white !important;
+    }
+    
+    .login-card {
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+    }
+    
+    .admin-header,
+    .section-actions,
+    .actions {
+        display: none !important;
+    }
+}

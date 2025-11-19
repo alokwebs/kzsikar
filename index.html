@@ -5,1170 +5,252 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KZ Events Sikar - Premium Event Management</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
-
-    :root {
-      --primary: #667eea;
-      --secondary: #764ba2;
-      --accent: #ff6b35;
-      --dark: #2d3748;
-      --light: #f7fafc;
-      --text: #4a5568;
-    }
-
-    body {
-      background: #fff;
-      overflow-x: hidden;
-    }
-
-    /* HEADER STYLES */
-    .navbar {
-      width: 100%;
-      height: 80px;
-      background: linear-gradient(90deg, #ffffff 0%, #ffe6f7 40%, #d5d8ff 100%);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 60px;
-      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
-      position: fixed;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .kz-logo-text {
-      font-family: 'Arial Black', Gadget, sans-serif;
-      font-size: 80px;
-      font-weight: 900;
-      color: #FF0000;
-      line-height: 1;
-      letter-spacing: -5px;
-      text-transform: uppercase;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    }
-
-    .logo h1 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #333;
-    }
-
-    .logo h1 span {
-      color: #ff3c00;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 30px;
-    }
-
-    .nav-links ul {
-      display: flex;
-      list-style: none;
-      gap: 35px;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: #444;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: 0.3s ease;
-      position: relative;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: #ff3c00;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      width: 0%;
-      height: 2px;
-      bottom: -5px;
-      left: 0;
-      background: #ff3c00;
-      transition: 0.3s ease;
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .owner img {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      border: 2px solid #ff3c00;
-      padding: 3px;
-      background: white;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .owner img:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 10px #ff3c00;
-    }
-
-    .menu-toggle {
-      font-size: 1.8rem;
-      color: #ff3c00;
-      cursor: pointer;
-      display: none;
-    }
-
-    /* HERO SECTION */
-    .hero {
-      height: 100vh;
-      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), 
-                  url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80') no-repeat center center/cover;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: white;
-      padding: 0 20px;
-      margin-top: 80px;
-    }
-
-    .hero-content {
-      max-width: 900px;
-      animation: fadeIn 1.5s ease;
-    }
-
-    .hero h2 {
-      font-size: 4.5rem;
-      font-weight: 800;
-      margin-bottom: 20px;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-      line-height: 1.1;
-    }
-
-    .hero p {
-      font-size: 1.5rem;
-      margin-bottom: 40px;
-      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-    }
-
-    .booking-btn {
-      display: inline-block;
-      background: linear-gradient(45deg, #ff3c00, #ff6b00);
-      color: white;
-      padding: 18px 45px;
-      font-size: 1.3rem;
-      font-weight: 700;
-      border-radius: 50px;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      box-shadow: 0 5px 15px rgba(255, 60, 0, 0.4);
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-    }
-
-    .booking-btn:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(255, 60, 0, 0.6);
-      background: linear-gradient(45deg, #ff6b00, #ff3c00);
-    }
-
-    /* VIDEO SECTION */
-    .video-section {
-      padding: 100px 0;
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .section-title {
-      font-size: 3rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 20px;
-    }
-
-    .section-subtitle {
-      font-size: 1.2rem;
-      color: var(--text);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .video-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 30px;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .video-card {
-      background: white;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-    }
-
-    .video-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-    }
-
-    .video-wrapper {
-      position: relative;
-      width: 100%;
-      height: 250px;
-      overflow: hidden;
-    }
-
-    .video-thumbnail {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .video-card:hover .video-thumbnail {
-      transform: scale(1.1);
-    }
-
-    .play-button {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 80px;
-      height: 80px;
-      background: rgba(255, 107, 53, 0.9);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 2rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .play-button:hover {
-      background: var(--accent);
-      transform: translate(-50%, -50%) scale(1.1);
-    }
-
-    .video-info {
-      padding: 25px;
-    }
-
-    .video-title {
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--dark);
-      margin-bottom: 10px;
-    }
-
-    .video-description {
-      color: var(--text);
-      line-height: 1.6;
-      margin-bottom: 15px;
-    }
-
-    .video-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: var(--text);
-      font-size: 0.9rem;
-    }
-
-    /* REELS SECTION */
-    .reels-section {
-      padding: 100px 0;
-      background: var(--light);
-    }
-
-    .reels-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .reel-card {
-      background: white;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .reel-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    }
-
-    .reel-thumbnail {
-      width: 100%;
-      height: 400px;
-      object-fit: cover;
-    }
-
-    .reel-info {
-      padding: 20px;
-      text-align: center;
-    }
-
-    .reel-stats {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 10px;
-      color: var(--text);
-      font-size: 0.9rem;
-    }
-
-    /* SERVICES SECTION */
-    .services-section {
-      padding: 100px 0;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      color: white;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .service-card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(20px);
-      border-radius: 20px;
-      padding: 40px 30px;
-      text-align: center;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .service-card:hover {
-      transform: translateY(-10px);
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .service-icon {
-      width: 80px;
-      height: 80px;
-      background: white;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      color: var(--primary);
-      font-size: 2rem;
-    }
-
-    .service-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-    }
-
-    .service-card p {
-      opacity: 0.9;
-      line-height: 1.6;
-    }
-
-    /* TESTIMONIALS */
-    .testimonials-section {
-      padding: 100px 0;
-      background: var(--light);
-    }
-
-    .testimonials-container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .testimonial-card {
-      background: white;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      margin: 20px;
-    }
-
-    .client-avatar {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      margin: 0 auto 20px;
-      border: 4px solid var(--primary);
-    }
-
-    .testimonial-text {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      color: var(--text);
-      margin-bottom: 20px;
-      font-style: italic;
-    }
-
-    .client-name {
-      font-weight: 600;
-      color: var(--dark);
-      margin-bottom: 5px;
-    }
-
-    .client-role {
-      color: var(--accent);
-      font-size: 0.9rem;
-    }
-
-    /* CTA SECTION */
-    .cta-section {
-      padding: 100px 0;
-      background: linear-gradient(135deg, var(--accent) 0%, #ff8e53 100%);
-      color: white;
-      text-align: center;
-    }
-
-    .cta-content {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .cta-title {
-      font-size: 3.5rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-
-    .cta-subtitle {
-      font-size: 1.3rem;
-      margin-bottom: 40px;
-      opacity: 0.9;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .cta-btn {
-      padding: 18px 35px;
-      border-radius: 50px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .cta-btn-primary {
-      background: white;
-      color: var(--accent);
-      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
-    }
-
-    .cta-btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 25px rgba(255, 255, 255, 0.4);
-    }
-
-    .cta-btn-secondary {
-      background: transparent;
-      color: white;
-      border: 2px solid white;
-    }
-
-    .cta-btn-secondary:hover {
-      background: white;
-      color: var(--accent);
-      transform: translateY(-3px);
-    }
-
-    /* FLOATING WHATSAPP BUTTON */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      width: 70px;
-      height: 70px;
-      background: #25D366;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 2rem;
-      text-decoration: none;
-      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-      transition: all 0.3s ease;
-      z-index: 1000;
-      animation: pulse 2s infinite;
-    }
-
-    .whatsapp-float:hover {
-      transform: scale(1.1);
-      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
-    }
-
-    @keyframes pulse {
-      0% {
-        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-      }
-      50% {
-        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.8);
-      }
-      100% {
-        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-      }
-    }
-
-    .whatsapp-text {
-      position: absolute;
-      right: 80px;
-      background: #25D366;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 25px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      white-space: nowrap;
-      opacity: 0;
-      transform: translateX(20px);
-      transition: all 0.3s ease;
-    }
-
-    .whatsapp-float:hover .whatsapp-text {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    /* FLOATING BOOKING BUTTON */
-    .booking-float {
-      position: fixed;
-      bottom: 110px;
-      right: 25px;
-      background: linear-gradient(45deg, #ff3c00, #ff6b00);
-      color: white;
-      padding: 15px 25px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      box-shadow: 0 8px 25px rgba(255, 60, 0, 0.4);
-      transition: all 0.3s ease;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .booking-float:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(255, 60, 0, 0.6);
-    }
-
-    /* FOOTER */
-    .footer {
-      background: linear-gradient(135deg, #1a1f36 0%, #2d3748 100%);
-      color: white;
-      padding: 60px 0 20px;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .footer-content {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1.5fr;
-      gap: 40px;
-      margin-bottom: 40px;
-    }
-
-    .footer-brand {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .logos {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .logo-kz {
-      width: 50px;
-      height: 50px;
-      background: linear-gradient(135deg, var(--accent), #ff8e53);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 900;
-      font-size: 1.3rem;
-      font-family: 'Arial Black', sans-serif;
-    }
-
-    .events {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: white;
-    }
-
-    .sikar {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--accent);
-    }
-
-    .tagline {
-      color: #cbd5e0;
-      font-size: 1rem;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 15px;
-    }
-
-    .social-link {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      color: #cbd5e0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    .social-link:hover {
-      background: var(--accent);
-      color: white;
-      transform: translateY(-3px);
-    }
-
-    .footer-section h4 {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-      color: white;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .footer-links a {
-      color: #cbd5e0;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer-links a:hover {
-      color: var(--accent);
-    }
-
-    .contact-info {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: #cbd5e0;
-    }
-
-    .contact-item i {
-      color: var(--accent);
-      width: 20px;
-    }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding-top: 30px;
-    }
-
-    .footer-bottom-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .footer-bottom p {
-      color: #a0aec0;
-    }
-
-    .legal-links {
-      display: flex;
-      gap: 25px;
-    }
-
-    .legal-links a {
-      color: #a0aec0;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.3s ease;
-    }
-
-    .legal-links a:hover {
-      color: var(--accent);
-    }
-
-    /* ANIMATIONS */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* RESPONSIVE DESIGN */
-    @media (max-width: 1024px) {
-      .navbar {
-        padding: 0 25px;
-      }
-      
-      .menu-toggle {
-        display: block;
-      }
-
-      .nav-links {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100vh;
-        background: linear-gradient(180deg, #ffffff, #fff4f7, #e6e9ff);
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        transition: left 0.4s ease;
-        padding-top: 80px;
-        z-index: 998;
-      }
-
-      .nav-links.show {
-        left: 0;
-      }
-
-      .nav-links ul {
-        flex-direction: column;
-        gap: 25px;
-        margin-top: 30px;
-        text-align: center;
-      }
-
-      .hero h2 {
-        font-size: 3.5rem;
-      }
-
-      .footer-content {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .whatsapp-text {
-        display: none;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hero h2 {
-        font-size: 2.5rem;
-      }
-
-      .section-title {
-        font-size: 2.2rem;
-      }
-
-      .video-container {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-
-      .footer-bottom-content {
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
-      }
-
-      .cta-title {
-        font-size: 2.5rem;
-      }
-
-      .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .cta-btn {
-        width: 100%;
-        max-width: 300px;
-        justify-content: center;
-      }
-
-      .whatsapp-float {
-        width: 60px;
-        height: 60px;
-        font-size: 1.5rem;
-        bottom: 20px;
-        right: 20px;
-      }
-
-      .booking-float {
-        bottom: 90px;
-        right: 20px;
-        padding: 12px 20px;
-        font-size: 0.9rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero h2 {
-        font-size: 2rem;
-      }
-
-      .cta-title {
-        font-size: 2rem;
-      }
-
-      .whatsapp-float {
-        width: 55px;
-        height: 55px;
-        font-size: 1.3rem;
-      }
-
-      .booking-float {
-        bottom: 85px;
-        padding: 10px 18px;
-        font-size: 0.8rem;
-      }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="media.css">
 </head>
 <body>
+  <!-- Header Section -->
   <header class="navbar">
-    <div class="menu-toggle" id="menuToggle">
-      <i class="fas fa-bars"></i>
-    </div>
+    <div class="container">
+      <div class="nav-container">
+        <div class="logo">
+          <div class="logo-icon">KZ</div>
+          <div class="logo-text">
+            <span class="events">EVENTS</span>
+            <span class="sikar">SIKAR</span>
+          </div>
+        </div>
 
-    <div class="logo">
-      <div class="kz-logo-text">KZ</div>
-      <h1>EVENTS <span>SIKAR</span></h1>
-    </div>
+        <div class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
 
-    <nav class="nav-links" id="navLinks">
-      <ul>
-        <li><a href="" class="active">Home</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="aboutus.html">About Us</a></li>
-        <li><a href="booking.html">Booking</a></li>
-        <li><a href="contectus.html">Contact Us</a></li>
-      </ul>
-      <div class="owner">
-        <a href="login.html"><img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png" alt="Owner" title="Owner Dashboard"></a>
+        <nav class="nav-links" id="navLinks">
+          <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="booking.html">Booking</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+          <div class="owner">
+            <a href="login.html"><img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png" alt="Owner" title="Owner Dashboard"></a>
+          </div>
+        </nav>
       </div>
-    </nav>
+    </div>
   </header>
 
-  <!-- HERO SECTION -->
+  <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-content">
-      <h2>WELCOME TO<br>KZ EVENTS SIKAR</h2>
-      <p>Creating Unforgettable Moments & Memorable Experiences</p>
-      <a href="booking.html"><button class="booking-btn">Book Your Event Now</button></a>
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="hero-content">
+        <h1>Creating Unforgettable <span>Moments</span></h1>
+        <p>Premium event management services in Sikar. We turn your dreams into reality with flawless execution and creative excellence.</p>
+        <div class="hero-buttons">
+          <a href="booking.html" class="btn btn-primary">Book Your Event</a>
+          <a href="gallery.html" class="btn btn-secondary">View Our Work</a>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll Down</span>
+      <i class="fas fa-chevron-down"></i>
     </div>
   </section>
 
-  <!-- YOUTUBE VIDEOS SECTION -->
-  <section class="video-section">
-    <div class="section-header">
-      <h2 class="section-title">Event Highlights</h2>
-      <p class="section-subtitle">Watch our most memorable events and celebrations</p>
-    </div>
-    <div class="video-container">
-      <div class="video-card">
-        <div class="video-wrapper">
-          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Wedding Highlights" class="video-thumbnail">
-          <div class="play-button">
-            <i class="fas fa-play"></i>
-          </div>
-        </div>
-        <div class="video-info">
-          <h3 class="video-title">Grand Wedding Celebration</h3>
-          <p class="video-description">Beautiful traditional wedding with stunning decor and perfect coordination</p>
-          <div class="video-meta">
-            <span><i class="fas fa-eye"></i> 25K views</span>
-            <span><i class="fas fa-calendar"></i> 2 weeks ago</span>
-          </div>
-        </div>
+  <!-- Services Section -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Premium Services</h2>
+        <p>We offer comprehensive event management solutions tailored to your needs</p>
       </div>
-
-      <div class="video-card">
-        <div class="video-wrapper">
-          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Corporate Event" class="video-thumbnail">
-          <div class="play-button">
-            <i class="fas fa-play"></i>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-ring"></i>
           </div>
+          <h3>Wedding Planning</h3>
+          <p>Complete wedding planning from venue selection to decor, catering, and coordination.</p>
+          <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="video-info">
-          <h3 class="video-title">Corporate Annual Meet</h3>
-          <p class="video-description">Professional corporate event with advanced audio-visual setup</p>
-          <div class="video-meta">
-            <span><i class="fas fa-eye"></i> 18K views</span>
-            <span><i class="fas fa-calendar"></i> 1 month ago</span>
+        
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-briefcase"></i>
           </div>
+          <h3>Corporate Events</h3>
+          <p>Professional event management for conferences, seminars, and corporate celebrations.</p>
+          <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
         </div>
-      </div>
-
-      <div class="video-card">
-        <div class="video-wrapper">
-          <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Birthday Party" class="video-thumbnail">
-          <div class="play-button">
-            <i class="fas fa-play"></i>
+        
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-birthday-cake"></i>
           </div>
+          <h3>Birthday Parties</h3>
+          <p>Creative and fun birthday celebrations for all ages with customized themes.</p>
+          <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="video-info">
-          <h3 class="video-title">Milestone Birthday Party</h3>
-          <p class="video-description">Grand birthday celebration with themed decorations</p>
-          <div class="video-meta">
-            <span><i class="fas fa-eye"></i> 32K views</span>
-            <span><i class="fas fa-calendar"></i> 3 weeks ago</span>
+        
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-gem"></i>
           </div>
+          <h3>Anniversary Events</h3>
+          <p>Elegant anniversary celebrations that honor lasting love and create new memories.</p>
+          <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- REELS SECTION -->
-  <section class="reels-section">
-    <div class="section-header">
-      <h2 class="section-title">Instagram Reels</h2>
-      <p class="section-subtitle">Behind the scenes and quick highlights</p>
-    </div>
-    <div class="reels-container">
-      <div class="reel-card">
-        <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Decor Setup" class="reel-thumbnail">
-        <div class="reel-info">
-          <h3>Decor Magic</h3>
-          <div class="reel-stats">
-            <span><i class="fas fa-heart"></i> 2.5K</span>
-            <span><i class="fas fa-comment"></i> 145</span>
+  <!-- Portfolio Section -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Recent Work</h2>
+        <p>Take a look at some of our most memorable events and celebrations</p>
+      </div>
+      <div class="portfolio-grid">
+        <div class="portfolio-item">
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Wedding Event">
+          <div class="portfolio-overlay">
+            <h3>Grand Wedding</h3>
+            <p>Traditional wedding with stunning decor</p>
+          </div>
+        </div>
+        
+        <div class="portfolio-item">
+          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Corporate Event">
+          <div class="portfolio-overlay">
+            <h3>Corporate Conference</h3>
+            <p>Professional setup with advanced AV</p>
+          </div>
+        </div>
+        
+        <div class="portfolio-item">
+          <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Birthday Party">
+          <div class="portfolio-overlay">
+            <h3>Milestone Birthday</h3>
+            <p>Themed celebration with entertainment</p>
           </div>
         </div>
       </div>
+      <div class="text-center">
+        <a href="gallery.html" class="btn btn-outline">View Full Gallery</a>
+      </div>
+    </div>
+  </section>
 
-      <div class="reel-card">
-        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Stage Setup" class="reel-thumbnail">
-        <div class="reel-info">
-          <h3>Stage Setup</h3>
-          <div class="reel-stats">
-            <span><i class="fas fa-heart"></i> 3.2K</span>
-            <span><i class="fas fa-comment"></i> 210</span>
+  <!-- Testimonials Section -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <h2>What Our Clients Say</h2>
+        <p>Don't just take our word for it - hear from our satisfied clients</p>
+      </div>
+      <div class="testimonials-slider">
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <p>"KZ Events made my wedding absolutely perfect! Their attention to detail and professionalism was beyond expectations."</p>
+          </div>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Client">
+            <div>
+              <h4>Priya Sharma</h4>
+              <span>Wedding Client</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <p>"Our corporate event was executed flawlessly. The team was professional, creative, and met all our requirements perfectly."</p>
+          </div>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Client">
+            <div>
+              <h4>Rajesh Kumar</h4>
+              <span>Corporate Client</span>
+            </div>
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="reel-card">
-        <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Fun Moments" class="reel-thumbnail">
-        <div class="reel-info">
-          <h3>Fun Moments</h3>
-          <div class="reel-stats">
-            <span><i class="fas fa-heart"></i> 4.1K</span>
-            <span><i class="fas fa-comment"></i> 325</span>
-          </div>
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to Create Your Dream Event?</h2>
+        <p>Contact us today for a free consultation and let's bring your vision to life</p>
+        <div class="cta-buttons">
+          <a href="contact.html" class="btn btn-primary">Get In Touch</a>
+          <a href="tel:+919876543210" class="btn btn-secondary">Call Now</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SERVICES SECTION -->
-  <section class="services-section">
-    <div class="section-header">
-      <h2 class="section-title">Our Services</h2>
-      <p class="section-subtitle">Complete event management solutions</p>
-    </div>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-icon">
-          <i class="fas fa-ring"></i>
-        </div>
-        <h3>Wedding Planning</h3>
-        <p>Complete wedding planning from venue selection to decor and catering</p>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">
-          <i class="fas fa-briefcase"></i>
-        </div>
-        <h3>Corporate Events</h3>
-        <p>Professional corporate event management for all business needs</p>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">
-          <i class="fas fa-birthday-cake"></i>
-        </div>
-        <h3>Birthday Parties</h3>
-        <p>Creative birthday celebrations for all ages and themes</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS SECTION -->
-  <section class="testimonials-section">
-    <div class="section-header">
-      <h2 class="section-title">Client Testimonials</h2>
-      <p class="section-subtitle">What our clients say about us</p>
-    </div>
-    <div class="testimonials-container">
-      <div class="testimonial-card">
-        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Client" class="client-avatar">
-        <p class="testimonial-text">"KZ Events made my wedding absolutely perfect! Their attention to detail and professionalism was beyond expectations."</p>
-        <h4 class="client-name">Priya Sharma</h4>
-        <p class="client-role">Wedding Client</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA SECTION -->
-  <section class="cta-section">
-    <div class="cta-content">
-      <h2 class="cta-title">Ready to Create Magic?</h2>
-      <p class="cta-subtitle">Let's work together to create an unforgettable event that will be cherished forever</p>
-      <div class="cta-buttons">
-        <a href="booking.html" class="cta-btn cta-btn-primary">
-          <i class="fas fa-calendar-check"></i>
-          Book Your Event
-        </a>
-        <a href="contectus.html" class="cta-btn cta-btn-secondary">
-          <i class="fas fa-phone"></i>
-          Contact Us Now
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FLOATING BUTTONS -->
-  <a href="https://wa.me/919876543210" class="whatsapp-float" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-    <span class="whatsapp-text">Chat with us on WhatsApp</span>
-  </a>
-
-  <a href="booking.html" class="booking-float">
-    <i class="fas fa-calendar-plus"></i>
-    Book Now
-  </a>
-
-  <!-- FOOTER -->
+  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
-        <!-- Brand & Social -->
         <div class="footer-section">
-          <div class="footer-brand">
-            <div class="logos">
-              <span class="logo-kz">KZ</span>
+          <div class="footer-logo">
+            <div class="logo">
+              <div class="logo-icon">KZ</div>
               <div class="logo-text">
                 <span class="events">EVENTS</span>
                 <span class="sikar">SIKAR</span>
               </div>
             </div>
-            <p class="tagline">Creating unforgettable moments</p>
+            <p>Creating unforgettable moments through exceptional event planning and execution.</p>
             <div class="social-links">
-              <a href="#" class="social-link">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="#" class="social-link">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="#" class="social-link">
-                <i class="fab fa-whatsapp"></i>
-              </a>
-              <a href="#" class="social-link">
-                <i class="fab fa-youtube"></i>
-              </a>
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-whatsapp"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
             </div>
           </div>
         </div>
-
-        <!-- Quick Links -->
+        
         <div class="footer-section">
-          <h4>Quick Links</h4>
-          <div class="footer-links">
-            <a href="#home">Home</a>
-            <a href="#services">Services</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-          </div>
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="booking.html">Booking</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
         </div>
-
-        <!-- Services -->
+        
         <div class="footer-section">
-          <h4>Services</h4>
-          <div class="footer-links">
-            <a href="#">Wedding Planning</a>
-            <a href="#">Corporate Events</a>
-            <a href="#">Birthday Parties</a>
-            <a href="#">Event Decor</a>
-          </div>
+          <h3>Services</h3>
+          <ul>
+            <li><a href="#">Wedding Planning</a></li>
+            <li><a href="#">Corporate Events</a></li>
+            <li><a href="#">Birthday Parties</a></li>
+            <li><a href="#">Anniversary Events</a></li>
+            <li><a href="#">Event Decor</a></li>
+          </ul>
         </div>
-
-        <!-- Contact -->
+        
         <div class="footer-section">
-          <h4>Contact Info</h4>
+          <h3>Contact Info</h3>
           <div class="contact-info">
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Sikar, Rajasthan, India</span>
+            </div>
             <div class="contact-item">
               <i class="fas fa-phone"></i>
               <span>+91 98765 43210</span>
@@ -1177,74 +259,30 @@
               <i class="fas fa-envelope"></i>
               <span>info@kzevents.com</span>
             </div>
-            <div class="contact-item">
-              <i class="fas fa-map-marker-alt"></i>
-              <span>Sikar, Rajasthan</span>
-            </div>
           </div>
         </div>
       </div>
-
-      <!-- Footer Bottom -->
+      
       <div class="footer-bottom">
-        <div class="footer-bottom-content">
-          <p>&copy; 2024 KZ Events Sikar. All rights reserved.</p>
-          <div class="legal-links">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="#">Cookies</a>
-          </div>
+        <p>&copy; 2024 KZ Events Sikar. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <script>
-    // Mobile Menu Toggle
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.querySelector('.nav-links');
+  <!-- Floating Buttons -->
+  <a href="https://wa.me/919876543210" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <a href="booking.html" class="booking-float">
+    <i class="fas fa-calendar-plus"></i>
+    <span>Book Now</span>
+  </a>
 
-    menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
-      menuToggle.innerHTML = navLinks.classList.contains('show') 
-        ? '<i class="fas fa-times"></i>' 
-        : '<i class="fas fa-bars"></i>';
-    });
-
-    // Video Play Functionality
-    document.querySelectorAll('.play-button').forEach(button => {
-      button.addEventListener('click', function() {
-        const videoCard = this.closest('.video-card');
-        const title = videoCard.querySelector('.video-title').textContent;
-        alert(`Playing: ${title}\n\nIn a real implementation, this would open the YouTube video.`);
-      });
-    });
-
-    // Smooth Scroll for Anchor Links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-
-    // Add scroll animation
-    window.addEventListener('scroll', function() {
-      const navbar = document.querySelector('.navbar');
-      if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-        navbar.style.backdropFilter = 'blur(20px)';
-      } else {
-        navbar.style.background = 'linear-gradient(90deg, #ffffff 0%, #ffe6f7 40%, #d5d8ff 100%)';
-        navbar.style.backdropFilter = 'none';
-      }
-    });
-  </script>
+  <script src="hello.js"></script>
 </body>
 </html>
